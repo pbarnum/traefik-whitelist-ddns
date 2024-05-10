@@ -1,9 +1,9 @@
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: ip-whitelist
+  name: ip-allowlist
 spec:
-  ipWhiteList:
+  ipAllowList:
     sourceRange:
       - 1.1.1.1 # dynamically changing
     # Uncomment if you need to set depth

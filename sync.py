@@ -10,7 +10,7 @@ def main():
     config.load_incluster_config()
     api = client.CustomObjectsApi()
 
-    custom_domain = os.environ.get('WHITELIST_CUSTOM_DOMAIN')
+    custom_domain = os.environ.get('ALLOWLIST_CUSTOM_DOMAIN')
 
     current = []
     public_ip = urlopen('https://api.ipify.org').read().decode('utf8')
@@ -23,17 +23,17 @@ def main():
 
     patch_body = {
         "spec": {
-            "ipWhiteList": {
+            "ipAllowList": {
                 "sourceRange": current
             }
         }
     }
 
-    name = os.environ.get('WHITELIST_MIDDLEWARE_NAME', 'ip-whitelist')
-    namespace = os.environ.get('WHITELIST_TRAEFIK_NAMESPACE', 'traefik-system')
+    name = os.environ.get('ALLOWLIST_MIDDLEWARE_NAME', 'ip-allowlist')
+    namespace = os.environ.get('ALLOWLIST_TRAEFIK_NAMESPACE', 'traefik-system')
 
     patch_resource = api.patch_namespaced_custom_object(
-        group="traefik.containo.us",
+        group="traefik.io",
         version="v1alpha1",
         name=name,
         namespace=namespace,

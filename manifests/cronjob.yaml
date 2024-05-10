@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: traefik-whitelist-sync
+  name: traefik-allowlist-sync
 spec:
   schedule: "*/5 * * * *"
   successfulJobsHistoryLimit: 1
@@ -11,13 +11,13 @@ spec:
         spec:
           serviceAccountName: traefik
           containers:
-            - name: traefik-whitelist-sync
-              image: kubitodev/traefik-ip-whitelist-sync:latest
+            - name: traefik-allowlist-sync
+              image: kubitodev/traefik-ip-allowlist-sync:latest
               env:
-                - name: WHITELIST_MIDDLEWARE_NAME
-                  value: ip-whitelist
-                - name: WHITELIST_TRAEFIK_NAMESPACE
+                - name: ALLOWLIST_MIDDLEWARE_NAME
+                  value: ip-allowlist
+                - name: ALLOWLIST_TRAEFIK_NAMESPACE
                   value: traefik-system
-                # - name: WHITELIST_CUSTOM_DOMAIN
+                # - name: ALLOWLIST_CUSTOM_DOMAIN
                 #   value: example.com
           restartPolicy: OnFailure

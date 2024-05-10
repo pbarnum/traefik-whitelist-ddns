@@ -25,7 +25,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            docker.io/kubitodev/traefik-ip-whitelist-sync
+            docker.io/kubitodev/traefik-ip-allowlist-sync
           tags: |
             # Gets the new_tag output from the previous step
             type=semver,pattern={{version}},value=${{ steps.autotag.outputs.new_tag }}
